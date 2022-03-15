@@ -11,6 +11,9 @@ a PDP-11 simulator.**
 
 ## Build Instructions
 Unless otherwise noted, file and directory names refer to this repository.
+!!! These instructions are outdated because the python files use python2 and
+there is no information about which compiler should be used. The code needs
+some modifications if it is compiled with modern versions of gcc. !!!
 
 1. Download the source code for the Simh simulator from here:
    http://simh.trailing-edge.com/. Make sure that you download
