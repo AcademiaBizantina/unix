@@ -21,7 +21,7 @@
 
 
 USECOREPATCHES = yes
-EXTRAPATCHES = 
+EXTRAPATCHES =
 
 ALL = rf0.dsk rk0.dsk
 MKFS = ../tools/mkfs
@@ -143,8 +143,9 @@ tape : protofs
 
 install : rf0.dsk rk0.dsk
 	@echo Installing...
+	@mkdir ../images
 	@cp rf0.dsk rk0.dsk ../boot/m792low.load ../images
-	
+
 # clean intermediate files
 clean :
 	rm -f $(CLEANSRCS) cleansrc
@@ -166,4 +167,3 @@ clobber : clean
 	@$(AS) $<
 	@../tools/fixaout.py
 	@mv a.out $@
-
