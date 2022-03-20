@@ -11,9 +11,6 @@ a PDP-11 simulator.**
 
 ## Build Instructions
 Unless otherwise noted, file and directory names refer to this repository.
-!!! These instructions are outdated because the python files use python2 and
-there is no information about which compiler should be used. The code needs
-some modifications if it is compiled with modern versions of gcc. !!!
 
 1. Download the source code for the Simh simulator from here:
    http://simh.trailing-edge.com/. Make sure that you download
@@ -21,9 +18,9 @@ some modifications if it is compiled with modern versions of gcc. !!!
 
 2. Unpack Simh somewhere. Make the BIN/ directory in Simh at the top level.
    Do make pdp11 to make the pdp11 simulator in the BIN/ directory. Copy
-   the BIN/pdp11 executable into the tools/ directory.
+   the BIN/pdp11 executable into the tools/ directory of this repo.
 
-2. Return to the 1st Edition top-level directory. Do a make. This will do
+3. Return to the 1st Edition top-level directory. Do a make. This will do
    several things.  It will build tools/mkfs, tools/ml and tools/apout/apout.
    These tools are required to build the filesystems for 1e UNIX, and the
    kernel. It will create kernel sources with some necessary patches, assemble
@@ -32,6 +29,8 @@ some modifications if it is compiled with modern versions of gcc. !!!
    and tape images and install these in the images directory. You can also do
    a "make clean" to clean out the images/ and build/ directories. A "make
    clobber" will clean out the images/, build/  and tools/ directories.
+
+The project was build with cc (GCC) 11.1.0 and Simh 3.11.0.
 
 ## Running 1st Edition UNIX
 
