@@ -42,7 +42,7 @@ int INTMODE=0;		/* 0 = integers, 1 = longs */
 /* Temporary variables */
 FLOAT Srcflt;		/* Float specified by FSRC field */
 pdpfloat *fladdr;	/* Address of float  in dspace */
-int   AC;		/* Accumulator field in ir */
+static int   AC;		/* Accumulator field in ir */
 int32_t srclong;	/* Longword from source address */
 int32_t dstlong;	/* Longword for destination address */
 static char *buf, *buf2; /* for copylong */
@@ -75,7 +75,7 @@ static void to11float(FLOAT *in, pdpfloat *out)
   FLOAT infloat= *in;
 
   FpDebug((dbg_file, "\t0%o to11float in is %f\n",regs[7], infloat));
-  if (infloat < 0.0) { out->sign=1; infloat= -infloat; } 
+  if (infloat < 0.0) { out->sign=1; infloat= -infloat; }
   else out->sign=0;
 
   if (infloat==0.0) { out->frac1=0; out->frac2=0; out->exp=0; return; }
@@ -95,7 +95,7 @@ static void to11float(FLOAT *in, pdpfloat *out)
 static struct { u_int16_t lo; u_int16_t hi; } intpair;
 /* Load (and convert if necessary) the float described by the source */
 /* address into Srcflt. */
-static void 
+static void
 load_flt(void)
 {
     u_int16_t indirect,addr;
@@ -180,7 +180,7 @@ load_flt(void)
 
 /* Save (and convert if necessary) Srcflt into the float described by the
  * destination address */
-static void 
+static void
 save_flt(void)
 {
     u_int16_t indirect;
@@ -255,7 +255,7 @@ save_flt(void)
 #define sl_long(addr, word) \
 	{ adptr= (u_int16_t *)&(dspace[addr]); copylong(*adptr, word); } \
 
-static void 
+static void
 load_long(void)
 {
     u_int16_t addr, indirect;
@@ -320,7 +320,7 @@ load_long(void)
 }
 
 
-static void 
+static void
 store_long(void)
 {
     u_int16_t addr, indirect;
@@ -401,7 +401,7 @@ ldf()	/* Load float */
   AC= (ir >> 6) & 3;
   load_flt();
   fregs[AC]= Srcflt;
-  FPC=0; FPV=0; 
+  FPC=0; FPV=0;
   if (fregs[AC]==0.0) FPZ=1; else FPZ=0;
   if (fregs[AC]<0.0)  FPN=1; else FPN=0;
 }
@@ -452,7 +452,7 @@ negf()	/* Negate float */
 {
   load_flt();
   fladdr->sign= -(fladdr->sign);
-  FPC=0; FPV=0; 
+  FPC=0; FPV=0;
   if (Srcflt==0.0) FPZ=1; else FPZ=0;
   if (Srcflt<0.0)  FPN=1; else FPN=0;
 }
@@ -618,3 +618,4 @@ void ldexpp()
  pdptmp.exp= srcword;
  from11float(&fregs[AC], &pdptmp);
 }
+
